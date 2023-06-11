@@ -4,6 +4,8 @@ import { Server, createServer } from 'http';
 import cors from 'cors';
 import { Routes } from '../routes';
 import { AppDataSource } from "../database/data-source";
+import { cwd } from "process";
+import path from "path";
 
 export class MainServer {
     private port:number = 3000;
@@ -13,6 +15,7 @@ export class MainServer {
     private middlewares() {
         this.app.use(cors())
         this.app.use(express.json())
+        this.app.use("/",express.static(path.join(cwd(),"public")))
         this.routes()
     }
 
